@@ -5,6 +5,8 @@
 #include "masterserver.h"
 
 MasterServer::MasterServer(int port, int clientport, QObject *parent) : QObject(parent){
+    randomFill = false;
+    srand(time(NULL));
     slaveSocket = new QTcpServer(this);
     slaveSocket->listen(QHostAddress::Any, port);
     Logger::log("Master Server: Listening on port " + QString::number(port) + " for slave servers...", LOG_NORMAL);
@@ -59,6 +61,10 @@ void MasterServer::newMessage(Message m){
 }
 
 void MasterServer::update(){
+    if(randomFill){
+        createMessages();
+        randomFill = false;
+    }
     for(int x=0;x<slaves.size();x++){
         if(!slaves.at(x)->isValid()){
             Logger::log("Master Server: Removed invalid slave from stack!", LOG_INFO);
@@ -74,6 +80,38 @@ void MasterServer::update(){
             clients.removeAt(x);
             x--;
         }
+    }
+}
+
+void MasterServer::triggerInitFill(){
+    randomFill = true;
+}
+
+void MasterServer::createMessages(){
+    Logger::log("Filling the message directory with some random data...", LOG_INFO);
+    int numIds = rand() % 100 + 50;
+    for(int i=0;i<numIds;i++){
+        int numMessages = rand() % 10 + 2;
+        QString id;
+        for(int j=0;j<40;j++){
+            id.append(QString::number(rand()%16, 16));
+        }
+        Logger::log("Created random ID: " + id, LOG_DEBUG);
+        for(int j=0;j<numMessages;j++){
+            int msgLength = rand() % 50 + 20;
+            QString msg;
+            for(int k=0;k<msgLength;k++){
+                msg.append((char)(rand()%256));
+            }
+            Message m;
+            m.id = id;
+            m.time = time(NULL);
+            m.data = msg.toUtf8();
+            messages.addMessage(m);
+            sleep(1);
+            Logger::log("Created message with length " + QString::number(msgLength), LOG_DEBUG);
+        }
+        Logger::log("Added " + QString::number(numMessages) + " messages for ID " + id, LOG_DEBUG);
     }
 }
 

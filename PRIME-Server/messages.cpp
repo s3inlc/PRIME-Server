@@ -218,7 +218,15 @@ void Messages::clean(){
                 if(ind.time > newestTime){
                     newestTime = ind.time;
                 }
-                index.append(ind);
+                for(int i=0;i<index.size();i++){
+                    if(ind.time < index.at(i).time){
+                        index.insert(i, ind);
+                        break;
+                    }
+                }
+                if(index.size() == 0 || index.last().time <= ind.time){
+                    index.append(ind);
+                }
             }
         }
         if(count == 0){ //directory is empty, we can delete this id
@@ -229,5 +237,6 @@ void Messages::clean(){
             knownIds.append(entries.at(x)); // add new id
         }
     }
+    Logger::log(QString::number(index.size()) + " messages indexed, " + QString::number(knownIds.size()) + " known IDs", LOG_DEBUG);
 }
 

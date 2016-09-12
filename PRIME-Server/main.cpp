@@ -62,16 +62,21 @@ int main(int argc, char *argv[]){
     //get command line arguments
     QString ip, own;
     bool isMaster = false;
+    bool initFill = false;
     char c;
     int port = 6666;
     int clientport = 6667;
     int externPort = 0;
     LogLevel l;
     LogMode m;
-    while ((c = getopt (argc, argv, "ms:p:c:i:e:hdl:o:")) != -1){
+    while ((c = getopt (argc, argv, "ms:p:c:i:e:hdl:o:f")) != -1){
         switch (c){
             case 'm':
                 isMaster = true;
+                break;
+            case 'f':
+                //hidden option to fill the initial message directory with some random data
+                initFill = true;
                 break;
             case 'd':
                 Logger::setLevel(LOG_DEBUG);
@@ -154,7 +159,10 @@ int main(int argc, char *argv[]){
 
     if(isMaster){
         Logger::log("Starting master server on port " + QString::number(port) + "...", LOG_NORMAL);
-        new MasterServer(port, clientport);
+        MasterServer *ms = new MasterServer(port, clientport);
+        if(initFill){
+            ms->triggerInitFill();
+        }
     }
     else{
         if(ip.length() == 0){

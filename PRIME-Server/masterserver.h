@@ -31,6 +31,8 @@ public slots:
     QList<SlaveServerConnection> getSlaveServers();
     void newMessage(Message m);
     void update();
+    void triggerInitFill();
+    void createMessages();
 
 private:
     QTcpServer *slaveSocket;
@@ -39,6 +41,7 @@ private:
     QList<MasterClientProtocolV1*> clients;
     Messages messages;
     QTimer timer;
+    bool randomFill;
 };
 
 #endif // MASTERSERVER_H
