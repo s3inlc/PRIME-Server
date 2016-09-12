@@ -25,12 +25,13 @@ class Messages : public QObject
 public:
     explicit Messages(QObject *parent = 0);
 
-    QList<Message> getMessages(QString id);
+    QList<Message> getMessages(int pos);
     bool addMessage(Message);
-    QByteArray getData(QStringList ids);
+    QByteArray getData(QString ids);
     QList<Message> getMessageBatch(int time);
     QList<QString> getAllIds();
     int getNewestTime();
+    QString getIdForPos(int pos);
 
     QString getId(QString fullPath);
     int getTime(QString fullPath);

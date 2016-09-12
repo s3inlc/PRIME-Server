@@ -55,7 +55,11 @@ void SlaveClientProtocolV1::socketError(QAbstractSocket::SocketError err){
 
 void SlaveClientProtocolV1::callGetMessages(QList<QByteArray> content){
     Logger::log("Slave-Client Protocol: " + socket->peerAddress().toString() + " called GTMSG", LOG_DEBUG);
-    QStringList ids = QString(content.at(1)).replace("{", "").replace("}", "").split(";");
+    QString ids = QString(content.at(1)).replace("{", "").replace("}", "");
+    if(ids.length() != messages->getAllIds().size()){
+        socket->write(QString("ERROR:Invalid Bit-Vector size!\n").toUtf8());
+        return;
+    }
     QByteArray data = messages->getData(ids);
     socket->write(QString("GTMSG:OK:" + data.toBase64() + "\n").toUtf8());
 }

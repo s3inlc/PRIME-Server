@@ -13,7 +13,8 @@ Messages::Messages(QObject *parent) : QObject(parent){
     cleanTimer.start();
 }
 
-QList<Message> Messages::getMessages(QString id){
+QList<Message> Messages::getMessages(int pos){
+    QString id = getIdForPos(pos);
     QList<Message> messages;
     int t = time(0);
     QDir receiver(path + MSG_FOLDER + id);
@@ -97,13 +98,14 @@ bool Messages::addMessage(Message msg){
     return true;
 }
 
-QByteArray Messages::getData(QStringList ids){
-    //TODO: generate data from the list of requests (byte by byte addition and modulo with 256)
-    //TODO: check here separately that every message included is in the given time frame and it shouldn't be already deleted
+QByteArray Messages::getData(QString ids){
     QList<QByteArray> data;
     int longest = 0;
-    for(int x=0;x<ids.size();x++){
-        QList<Message> msg = getMessages(ids.at(x));
+    for(int x=0;x<ids.length();x++){
+        if(ids.at(x) == '0'){
+            continue;
+        }
+        QList<Message> msg = getMessages(x);
         QByteArray stream;
         for(int y=0;y<msg.size();y++){
             stream += msg.at(y).data;
@@ -151,6 +153,12 @@ QList<QString> Messages::getAllIds(){
 
 int Messages::getNewestTime(){
     return newestTime;
+}
+
+QString Messages::getIdForPos(int pos){
+    QList<QString> ids = getAllIds();
+    sort(ids.begin(), ids.end());
+    return ids.at(pos);
 }
 
 QString Messages::getId(QString fullPath){
