@@ -43,9 +43,9 @@ void help(){
     cout << "-i\tSpecifies the IP where the slave server should listening on." << endl;
     cout << "\tThis needs to be the IP where the slaves can connect to (public" << endl;
     cout << "\tIP if server is running behind a firewall." << endl;
-    cout << "-dSet log level to DEBUG" << endl;
-    cout << "-lSet log level (LOG_DEBUG, LOG_INFO, LOG_NORMAL, LOG_ERROR, LOG_NOTHING)" << endl;
-    cout << "-oSet the log mode (LOGMODE_NOTHING, LOGMODE_FILE, LOGMODE_STDOUT, LOGMODE_BOTH)" << endl;
+    cout << "-d\tSet log level to DEBUG" << endl;
+    cout << "-l\tSet log level (LOG_DEBUG, LOG_INFO, LOG_NORMAL, LOG_ERROR, LOG_NOTHING)" << endl;
+    cout << "-o\tSet the log mode (LOGMODE_NOTHING, LOGMODE_FILE, LOGMODE_STDOUT, LOGMODE_BOTH)" << endl;
     cout << "-e\tExternal port of a slave server. This is needed in case the" << endl;
     cout << "\tslave server is running behind a firewall and the clientport" << endl;
     cout << "\tdiffers from the public port on the public ip." << endl << endl;
