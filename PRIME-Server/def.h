@@ -9,8 +9,7 @@
 #include <QString>
 #include <QByteArray>
 
-#define PING_TIMEOUT 30
-
+#define PING_TIMEOUT 30 //time after which a slave server gets disconnected when not responding
 #define MSG_FOLDER "msg/" //path where the message storage structure is located (relative or absolute)
 #define MSG_TIMEOUT 86400*7 //7 days currently
 #define MSG_LIST_LIMIT 20 //number of messages which are sent at once to a slave server

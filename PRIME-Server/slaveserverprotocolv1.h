@@ -16,15 +16,12 @@
 #include "logger.h"
 using namespace std;
 
-class SlaveServerProtocolV1 : public QObject
-{
+class SlaveServerProtocolV1 : public QObject {
     Q_OBJECT
 public:
     explicit SlaveServerProtocolV1(QHostAddress addr, int port, QHostAddress clientAddr, int clientPort, Messages *msg, int extPort);
     ~SlaveServerProtocolV1();
     bool isValid();
-
-signals:
 
 public slots:
     void readyRead();
@@ -42,7 +39,6 @@ private:
     QTimer pingTimer;
     Messages *messages;
     int lastPing;
-
     int externalPort;
 
     void callDiffMessages(QList<QByteArray> content);

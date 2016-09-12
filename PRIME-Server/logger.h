@@ -12,8 +12,7 @@
 #include "def.h"
 using namespace std;
 
-class Logger : public QObject
-{
+class Logger : public QObject {
     Q_OBJECT
 public:
     static void log(QString msg, LogLevel level);

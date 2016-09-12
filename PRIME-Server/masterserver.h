@@ -17,8 +17,7 @@
 #include "logger.h"
 using namespace std;
 
-class MasterServer : public QObject
-{
+class MasterServer : public QObject {
     Q_OBJECT
 public:
     explicit MasterServer(int port, int clientport, QObject *parent = 0);
@@ -31,7 +30,6 @@ public slots:
     void newClient();
     QList<SlaveServerConnection> getSlaveServers();
     void newMessage(Message m);
-
     void update();
 
 private:

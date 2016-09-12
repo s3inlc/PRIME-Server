@@ -19,8 +19,7 @@
 #include "logger.h"
 using namespace std;
 
-class Messages : public QObject
-{
+class Messages : public QObject {
     Q_OBJECT
 public:
     explicit Messages(QObject *parent = 0);
@@ -35,8 +34,6 @@ public:
 
     QString getId(QString fullPath);
     int getTime(QString fullPath);
-
-signals:
 
 public slots:
     void clean(); //remove older messages

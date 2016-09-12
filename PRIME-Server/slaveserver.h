@@ -16,18 +16,14 @@
 #include "logger.h"
 using namespace std;
 
-class SlaveServer : public QObject
-{
+class SlaveServer : public QObject {
     Q_OBJECT
 public:
     explicit SlaveServer(QHostAddress master, int masterPort, QHostAddress own, int clientPort, int externPort, QObject *parent = 0);
     ~SlaveServer();
 
-signals:
-
 public slots:
     void newClient();
-
     void update();
 
 private:

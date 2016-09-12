@@ -13,8 +13,7 @@
 #include "logger.h"
 using namespace std;
 
-class MasterClientProtocolV1 : public QObject
-{
+class MasterClientProtocolV1 : public QObject {
     Q_OBJECT
 public:
     explicit MasterClientProtocolV1(QTcpSocket *sock, Messages *msg, QObject *parent = 0);

@@ -14,8 +14,7 @@
 #include "logger.h"
 using namespace std;
 
-class SlaveClientProtocolV1 : public QObject
-{
+class SlaveClientProtocolV1 : public QObject {
     Q_OBJECT
 public:
     explicit SlaveClientProtocolV1(QTcpSocket *sock, Messages *msg, QObject *parent = 0);
