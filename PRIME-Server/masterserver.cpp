@@ -108,7 +108,6 @@ void MasterServer::createMessages(){
             m.time = time(NULL);
             m.data = msg.toUtf8();
             messages.addMessage(m);
-            sleep(1);
             Logger::log("Created message with length " + QString::number(msgLength), LOG_DEBUG);
         }
         Logger::log("Added " + QString::number(numMessages) + " messages for ID " + id, LOG_DEBUG);
