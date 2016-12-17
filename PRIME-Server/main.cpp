@@ -69,7 +69,7 @@ int main(int argc, char *argv[]){
     int externPort = 0;
     LogLevel l;
     LogMode m;
-    while ((c = getopt (argc, argv, "ms:p:c:i:e:hdl:o:f")) != -1){
+    while (((c = getopt (argc, argv, "ms:p:c:i:e:hdl:o:f")) != -1) && (c != 255)){
         switch (c){
             case 'm':
                 isMaster = true;
