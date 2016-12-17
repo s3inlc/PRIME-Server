@@ -8,4 +8,8 @@ It is a project which is done at the University of Basel by [Sein Coray](https:/
 
 To build this project you need [Qt](http://qt.io). Just open the .pro file and build it if you are using the Qt Designer.
 
+Qt Requirements:
+
+``` apt-get install qtdeclarative5-dev qt5-qmake```
+
 On command line run ```qmake PRIME-Server.pro``` and then just ```make``` and the binary should be built.
