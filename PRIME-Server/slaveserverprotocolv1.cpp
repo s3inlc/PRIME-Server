@@ -68,7 +68,6 @@ void SlaveServerProtocolV1::readyRead(){
 void SlaveServerProtocolV1::connectToMaster(){
     state = SSSINIT;
     if(socket != NULL){
-        sleep(2);
         Logger::log("Slave-Server Protocol: Reconnecting...", LOG_INFO);
     }
     else{
